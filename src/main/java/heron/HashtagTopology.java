@@ -29,7 +29,7 @@ public class HashtagTopology {
         builder.setBolt("HashtagCount",new HashtagCount(),2).fieldsGrouping("HashtagFilter", new Fields("Hashtag"));
         builder.setBolt("Intermideateranking",new IntermediateRankings(TOP_N),2).fieldsGrouping("HashtagCount",new Fields("word"));
         builder.setBolt("Totalranker", new TotalRankings(TOP_N),1).globalGrouping("Intermediateranking");
-        builder.setBolt("Visualization", new Visualization(),1).globalGrouping("Totalranker");
+//        builder.setBolt("Visualization", new Visualization(),1).globalGrouping("Totalranker");
 
         Config conf = new Config();
         conf.setDebug(true);
