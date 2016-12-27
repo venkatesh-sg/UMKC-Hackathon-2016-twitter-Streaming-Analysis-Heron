@@ -21,15 +21,15 @@ public class HashtagTopology {
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
 
-        builder.setSpout("spout", new HashtagSpout("8xpDZGqUfNoUB45FrHzzi8B4L",
-                "GYs9C9Qtwg0Vggq7bV3MkEkB2cKPKRVbtWKcb0z9hZHGMl8tGh",
-                "591123770-CrvIWxQxaEWEkL2CT4TyTuIkLRBu0MKltNXINA0J",
-                "a6OIxTo8Q25ubwyYhXsqsTidQQh6ANEcxm8Cq2uQ3Df0H"));
+        builder.setSpout("spout", new HashtagSpout("Consumer Key",
+                "Consumer Secret",
+                "Access Token",
+                "Access Token Secret"));
         builder.setBolt("HashtagFilter",new HashtagFilter(),2).shuffleGrouping("spout");
         builder.setBolt("HashtagCount",new HashtagCount(),2).fieldsGrouping("HashtagFilter", new Fields("Hashtag"));
         builder.setBolt("Intermediateranking",new IntermediateRankings(TOP_N),2).fieldsGrouping("HashtagCount",new Fields("word"));
         builder.setBolt("Totalranker", new TotalRankings(TOP_N),1).globalGrouping("Intermediateranking");
-//        builder.setBolt("Visualization", new Visualization(),1).globalGrouping("Totalranker");
+        builder.setBolt("Visualization", new Visualization(),1).globalGrouping("Totalranker");
 
         Config conf = new Config();
         conf.setDebug(true);
@@ -40,8 +40,8 @@ public class HashtagTopology {
 
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("TopHashtags",conf,builder.createTopology());
-        //File htmlFile = new File("D:\\venky\\downloads\\umkc_hackathon_heron\\src\\main\\java\\heron\\Visualization\\index.html");
-        //Desktop.getDesktop().browse(htmlFile.toURI());
+        File htmlFile = new File("PATH TO FILE\\src\\main\\java\\heron\\Visualization\\index.html");
+        Desktop.getDesktop().browse(htmlFile.toURI());
 
 
     }

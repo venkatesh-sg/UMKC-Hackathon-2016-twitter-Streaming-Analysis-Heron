@@ -49,15 +49,14 @@ public class GeoLoc extends BaseRichBolt {
     }
     public void execute(Tuple tuple)
     {
-        //coords.add(tuple);
-        //Desktop.getDesktop().browse(HeatMap.html);
+        
         JSONObject obj = new JSONObject();
         obj.put("Latitude",tuple.getValueByField("Latitude"));
         obj.put("Longitude",tuple.getValueByField("Longitude"));
 
         try {
 
-            FileWriter file = new FileWriter("D:\\venky\\downloads\\umkc_hackathon_heron\\src\\main\\java\\heron\\Visualization\\GeoLoc.csv",true);
+            FileWriter file = new FileWriter("PATH TO FILE\\src\\main\\java\\heron\\Visualization\\GeoLoc.csv",true);
             file.write(tuple.getValueByField("Latitude")+","+tuple.getValueByField("Longitude")+"\n");
             file.flush();
             file.close();

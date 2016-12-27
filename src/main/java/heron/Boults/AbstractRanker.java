@@ -12,12 +12,7 @@ import backtype.storm.tuple.Values;
 import heron.Tools.Rankings;
 import heron.Tools.TupleHelpers;
 import org.apache.logging.log4j.Logger;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 //This abstract bolt provides the basic behavior of bolts that rank objects according to their count.
@@ -74,26 +69,6 @@ public abstract class AbstractRanker extends BaseBasicBolt {
 
   private void emitRankings(BasicOutputCollector collector) {
     collector.emit(new Values(rankings.copy()));
-    String r=rankings.copy().toString();
-    r=r.substring(1,r.length()-1);
-    List<String> items = Arrays.asList(r.split(", "));
-    try {
-      FileWriter file = new FileWriter("D:\\venky\\downloads\\umkc_hackathon_heron\\src\\main\\java\\heron\\Visualization\\Hashtags.csv");
-      file.write("hashtag" + "," + "count" + "\n");
-      for(int i=0;i<items.size();i++){
-        String l=items.get(i);
-        if(l.startsWith("[#")){
-          file.write(l.substring(2,l.length()-6) + "," +l.substring(l.length()-5,l.length()-4)  + "\n");
-        }
-      }
-      file.flush();
-      file.close();
-    }catch (IOException e) {
-      e.printStackTrace();
-    }
-
-
-
     getLogger().debug("Rankings: " + rankings);
   }
 

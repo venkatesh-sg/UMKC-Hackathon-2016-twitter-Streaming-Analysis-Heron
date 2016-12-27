@@ -12,16 +12,19 @@ import heron.Spouts.HashtagSpout;
 import heron.Spouts.SourceSpout;
 import heron.Tools.Rankings;
 import heron.Tools.RankableObjectWithFields;
+
+import java.awt.*;
+import java.io.File;
 import java.util.LinkedList;
 
 public class SourceTopology {
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
 
-        builder.setSpout("spout", new SourceSpout("8xpDZGqUfNoUB45FrHzzi8B4L",
-                "GYs9C9Qtwg0Vggq7bV3MkEkB2cKPKRVbtWKcb0z9hZHGMl8tGh",
-                "591123770-CrvIWxQxaEWEkL2CT4TyTuIkLRBu0MKltNXINA0J",
-                "a6OIxTo8Q25ubwyYhXsqsTidQQh6ANEcxm8Cq2uQ3Df0H"));
+        builder.setSpout("spout", new SourceSpout("Consumer Key",
+                "Consumer Secret",
+                "Access Token",
+                "Access Token Secret"));
         builder.setBolt("SourceFilter",new SourceFilter(),5).shuffleGrouping("spout");
         builder.setBolt("SourceCount",new SourceCount(),5).globalGrouping("SourceFilter");
 
@@ -31,8 +34,8 @@ public class SourceTopology {
 
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("Source",conf,builder.createTopology());
-        //File htmlFile = new File("D:\\venky\\downloads\\umkc_hackathon_heron\\src\\main\\java\\heron\\Visualization\\OS.html");
-        //Desktop.getDesktop().browse(htmlFile.toURI());
+        File htmlFile = new File("PATH TO FILE\\src\\main\\java\\heron\\Visualization\\OS.html");
+        Desktop.getDesktop().browse(htmlFile.toURI());
 
 
     }

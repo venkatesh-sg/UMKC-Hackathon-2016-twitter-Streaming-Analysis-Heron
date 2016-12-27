@@ -63,7 +63,7 @@ public class SourceCount extends BaseRichBolt {
         collector.emit(new Values(word, countMap.get(word)));
         try {
 
-            FileWriter file = new FileWriter("D:\\venky\\downloads\\umkc_hackathon_heron\\src\\main\\java\\heron\\Visualization\\OS.csv");
+            FileWriter file = new FileWriter("PATH TO FILE\\src\\main\\java\\heron\\Visualization\\OS.csv");
             file.write("count"+","+"Operating_System"+"\n");
             for(Map.Entry<String, Long> entry : countMap.entrySet()) {
                 file.write(entry.getValue()+","+entry.getKey()+"\n");

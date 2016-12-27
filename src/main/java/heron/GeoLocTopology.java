@@ -16,17 +16,17 @@ public class GeoLocTopology {
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
 
-        builder.setSpout("locspout", new GeoLocSpout("8xpDZGqUfNoUB45FrHzzi8B4L",
-                "GYs9C9Qtwg0Vggq7bV3MkEkB2cKPKRVbtWKcb0z9hZHGMl8tGh",
-                "591123770-CrvIWxQxaEWEkL2CT4TyTuIkLRBu0MKltNXINA0J",
-                "a6OIxTo8Q25ubwyYhXsqsTidQQh6ANEcxm8Cq2uQ3Df0H"));
+        builder.setSpout("locspout", new GeoLocSpout("Consumer Key",
+                "Consumer Secret",
+                "Access Token",
+                "Access Token Secret"));
         builder.setBolt("location", new GeoLoc()).shuffleGrouping("locspout");
         Config conf = new Config();
         conf.setDebug(true);
         conf.setMaxTaskParallelism(3);
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("Locations", conf, builder.createTopology());
-        //File htmlFile = new File("D:\\venky\\downloads\\umkc_hackathon_heron\\src\\main\\java\\heron\\Visualization\\HeatMap.html");
-        //Desktop.getDesktop().browse(htmlFile.toURI());
+        File htmlFile = new File("PATH TO FILE\\src\\main\\java\\heron\\Visualization\\HeatMap.html");
+        Desktop.getDesktop().browse(htmlFile.toURI());
     }
 }
