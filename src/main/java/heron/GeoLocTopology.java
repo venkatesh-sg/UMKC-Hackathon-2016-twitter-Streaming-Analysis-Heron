@@ -7,7 +7,7 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import heron.Boults.*;
-import heron.Spouts.GeoLocSpout;
+import heron.Spouts.Spout;
 
 import java.awt.*;
 import java.io.File;
@@ -16,7 +16,7 @@ public class GeoLocTopology {
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
 
-        builder.setSpout("locspout", new GeoLocSpout("Consumer Key",
+        builder.setSpout("locspout", new Spout("Consumer Key",
                 "Consumer Secret",
                 "Access Token",
                 "Access Token Secret"));

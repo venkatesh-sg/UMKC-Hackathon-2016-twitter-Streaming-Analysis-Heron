@@ -8,8 +8,7 @@ import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 import heron.Boults.*;
-import heron.Spouts.HashtagSpout;
-import heron.Spouts.SourceSpout;
+import heron.Spouts.Spout;
 import heron.Tools.Rankings;
 import heron.Tools.RankableObjectWithFields;
 
@@ -21,7 +20,7 @@ public class SourceTopology {
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
 
-        builder.setSpout("spout", new SourceSpout("Consumer Key",
+        builder.setSpout("spout", new Spout("Consumer Key",
                 "Consumer Secret",
                 "Access Token",
                 "Access Token Secret"));
