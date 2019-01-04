@@ -3,9 +3,9 @@
 
 ###Team Members:
 
-Sai Venkatesh Gatiganti
+Venkatesh 
 
-Karthik Reddy Vundela
+Karthik 
 
 Sri Chaitanya
 
