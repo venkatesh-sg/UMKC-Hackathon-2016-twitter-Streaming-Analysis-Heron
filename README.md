@@ -7,7 +7,7 @@ Sai Venkatesh Gatiganti
 
 Karthik Reddy Vundela
 
-Sri Chaitanya Patluri
+Sri Chaitanya
 
 ###Topologies:
 
